@@ -1,4 +1,6 @@
-🌌 Dream Pixels Forge
+# 🌌 Dream Pixels Forge
+
+![Dream Pixels Forge Banner](assets/image0.png)
 
 Exploring the intersection of Human Creativity and Machine Intelligence
 
