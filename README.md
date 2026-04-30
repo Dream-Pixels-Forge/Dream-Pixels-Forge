@@ -14,29 +14,13 @@ I'm currently focused on crafting tools that make complex workflows feel like ma
 
 These are open tools built for artists and developers to explore together. If you find them useful, leaving a ⭐ on the repository is the best way to support my work!
 
-Project
+Last Projects
 
-The Goal
-
-Status
-
-Aspect-Ratio
-
-Simplify framing for digital artists.
-
-Stable
-
-Photographer-Alpha7-Nodes
-
-Bring cinematic physics to AI generations.
-
-Beta
-
-Mzikart-Singer
-
-Experiments in AI-driven vocal expression.
-
-Active
+1. https://github.com/Dream-Pixels-Forge/brandly
+2. https://github.com/Dream-Pixels-Forge/artisan_labs_dev
+3. https://github.com/Dream-Pixels-Forge/universal-blender-mcp
+4. https://github.com/Dream-Pixels-Forge/prides
+5. https://github.com/Dream-Pixels-Forge/vanguard-wooden-uikit
 
 ## 🧪 Experiments & Learning
 
