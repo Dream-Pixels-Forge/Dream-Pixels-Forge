@@ -1,5 +1,8 @@
 # **🌌 Welcome to Dream Pixels Forge**
 
+<img width="1792" height="592" alt="image0" src="https://github.com/user-attachments/assets/720ca635-1744-4758-92ce-3cacb39bc210" />
+
+
 ### ***Orchestrating Creative Workflows through AI & Futurism***
 
 ## **👨‍💻 Vision**
