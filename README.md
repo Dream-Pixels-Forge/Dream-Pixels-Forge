@@ -55,3 +55,7 @@ Inspiration is a two-way street. If you find value in my tools, feel free to sta
 "The best way to predict the future is to forge it—together."
 
 ## 📫 Connect
+
+Stay updated with my latest experiments and creations:
+
+Maintained with ☕ and passion by Dream Pixels Forge.
