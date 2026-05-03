@@ -24,7 +24,7 @@ These are open tools built for artists and developers to explore together. If yo
 
 ### Project Showcase
 
-Current project snapshots are loaded from `assets/projects/`. New project images will display side by side in this section as they are added.
+Current project snapshots 
 
 <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-start;">
   <figure style="width:280px; margin:0;">
