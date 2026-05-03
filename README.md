@@ -31,7 +31,7 @@ Current project snapshots are shown below. The displayed image has been updated 
     <img src="assets/projects/dpf-obsidian-wiki.png" alt="Updated dpf-obsidian-wiki project screenshot" style="width:100%; height:auto; border-radius:16px; box-shadow:0 16px 40px rgba(0,0,0,0.15);" />
     <figcaption style="margin-top:0.75rem; font-size:0.95rem; line-height:1.4;">
       <strong>dpf-obsidian-wiki</strong><br />
-      Updated project preview · <a href="https://github.com/Dream-Pixels-Forge/dpf-obsidian-wiki">GitHub</a>
+      Updated project preview click to view the project· <a href="https://github.com/Dream-Pixels-Forge/dpf-obsidian-wiki">GitHub</a>
     </figcaption>
   </figure>
 </div>
