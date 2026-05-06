@@ -1,16 +1,16 @@
-# 🌌 Dream Pixels Forge
+# Dream Pixels Forge
 
 ![Dream Pixels Forge Banner](assets/image0.png)
 
 Exploring the intersection of Human Creativity and Machine Intelligence.
 
-## 💡 The Journey
+## The Journey
 
 I believe that technology is at its best when it acts as an invisible bridge between an idea and its realization. My work is a continuous exploration of how AI and 3D can empower creators to push the boundaries of their imagination.
 
 I'm currently focused on crafting tools that make complex workflows feel like magic—blending the precision of Blender with the raw power of generative AI.
 
-## 🛠️ Community Projects
+## Community Projects
 
 These are open tools built for artists and developers to explore together. If you find them useful, leaving a ⭐ on the repository is the best way to support my work!
 
@@ -42,7 +42,7 @@ Current project snapshots are shown below. The displayed image has been updated 
 | Photographer-Alpha7-Nodes | Bring cinematic physics to AI generations. | Beta | [GitHub](https://github.com/Dream-Pixels-Forge/Photographer-Alpha7-Nodes) |
 | Mzikart-Singer | Experiments in AI-driven vocal expression. | Active | [GitHub](https://github.com/Dream-Pixels-Forge/Mzikart-Singer) |
 
-## 🧪 Experiments & Learning
+## Experiments & Learning
 
 My daily "Forge" consists of playing with:
 
@@ -56,7 +56,7 @@ Inspiration is a two-way street. If you find value in my tools, feel free to sta
 
 > "The best way to predict the future is to forge it—together."
 
-## 📫 Connect
+## Connect
 
 Stay updated with my latest experiments and creations:
 
