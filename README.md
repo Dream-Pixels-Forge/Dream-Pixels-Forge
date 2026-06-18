@@ -1,4 +1,4 @@
-# Dream Pixels Forge
+# Dream Pixels Forge 🇨🇩
 
 ![Dream Pixels Forge Banner](assets/image0.png)
 
