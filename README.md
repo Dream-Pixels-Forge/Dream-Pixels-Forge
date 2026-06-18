@@ -48,7 +48,7 @@ My daily "Forge" consists of playing with:
 
 - Generative systems: ComfyUI, Stable Diffusion, and LLM orchestration.
 - Visual aesthetics: mastering glassmorphism and intuitive UI/UX.
-- Global tech: driven by the dream of seeing the DRC's creative tech scene shine on the world stage.
+- Global tech: driven by the dream of seeing the Democratic Republic of Congo's creative tech scene shine on the world stage.
 
 ## 🤝 Let's Build Together
 
