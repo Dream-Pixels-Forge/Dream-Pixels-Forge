@@ -1,0 +1,22 @@
+{
+  "name": "ugc",
+  "description": "Authentic user-generated-content style — handheld, natural light, casual framing",
+  "styleTokens": "handheld camera, natural lighting, authentic, casual, relatable, smartphone aesthetic",
+  "cameraSignature": "handheld shake, selfie angle, POV shot, quick pan",
+  "lightingSignature": "natural window light, overhead room light, no professional lighting",
+  "pacing": "fast",
+  "shotCount": 6,
+  "avgShotDuration": 2,
+  "models": {
+    "video": "hailuo_2_3",
+    "image": "nano_banana_2"
+  },
+  "aspectRatios": {
+    "tiktok": "9:16",
+    "instagram": "9:16",
+    "youtube": "16:9"
+  },
+  "negativePrompts": "professional lighting, studio setup, perfect framing, cinematic",
+  "bestFor": ["skincare", "food", "fashion", "lifestyle", "unboxing"],
+  "estimatedCreditsPerShot": 25
+}

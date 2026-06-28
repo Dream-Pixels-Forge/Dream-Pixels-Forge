@@ -1,0 +1,22 @@
+{
+  "name": "montage",
+  "description": "Fast-paced product montage with quick cuts, beat-synced transitions, and high energy",
+  "styleTokens": "quick cuts, beat synced, high energy, dynamic transitions, motion graphics",
+  "cameraSignature": "quick zoom in, whip pan, static with subject motion, match cut",
+  "lightingSignature": "bright, high contrast, colored gels, neon accents",
+  "pacing": "very fast",
+  "shotCount": 8,
+  "avgShotDuration": 1.5,
+  "models": {
+    "video": "hailuo_2_3",
+    "image": "nano_banana_2"
+  },
+  "aspectRatios": {
+    "tiktok": "9:16",
+    "instagram": "9:16",
+    "youtube": "16:9"
+  },
+  "negativePrompts": "slow, boring, static, low energy, blurry",
+  "bestFor": ["fashion", "sports", "tech", "energy drinks", "gaming"],
+  "estimatedCreditsPerShot": 20
+}

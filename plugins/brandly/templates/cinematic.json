@@ -1,0 +1,22 @@
+{
+  "name": "cinematic",
+  "description": "High-production-value cinematic product showcase with dramatic lighting and smooth camera moves",
+  "styleTokens": "cinematic lighting, shallow depth of field, smooth dolly movements, color graded, film grain",
+  "cameraSignature": "slow dolly in, gentle orbit, rack focus, aerial pull away",
+  "lightingSignature": "golden hour backlight, dramatic key light, rim light, soft fill",
+  "pacing": "slow",
+  "shotCount": 5,
+  "avgShotDuration": 4,
+  "models": {
+    "video": "kling3_0",
+    "image": "gpt_image_2"
+  },
+  "aspectRatios": {
+    "tiktok": "9:16",
+    "instagram": "9:16",
+    "youtube": "16:9"
+  },
+  "negativePrompts": "blurry, low quality, text overlay, watermark, distorted",
+  "bestFor": ["luxury products", "tech gadgets", "beauty", "food"],
+  "estimatedCreditsPerShot": 35
+}
