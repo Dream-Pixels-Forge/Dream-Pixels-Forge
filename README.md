@@ -1,6 +1,7 @@
-# Dream Pixels Forge 🇨🇩
 
-![Dream Pixels Forge Banner](assets/image0.png)
+# Dream Pixels Forge 
+
+<img width="1983" height="793" alt="banner" src="https://github.com/user-attachments/assets/2d30ebd1-0eae-4c9f-953f-274388cde4f4" />
 
 Exploring the intersection of Human Creativity and Machine Intelligence.
 
