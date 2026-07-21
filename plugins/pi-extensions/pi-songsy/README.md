@@ -14,7 +14,30 @@ A Pi agent extension for generating music using the MiniMax API. Create songs fr
 
 ## Installation
 
-### Option 1: Copy to Pi extensions directory
+### Option 1: Install from GitHub (recommended)
+
+Clone the repo and copy the extension:
+
+```bash
+# Clone the repository
+git clone https://github.com/Dream-Pixels-Forge/Dream-Pixels-Forge.git
+
+# Copy to Pi's global extensions
+cp -r Dream-Pixels-Forge/plugins/pi-extensions/pi-songsy/extensions/songsy ~/.pi/agent/extensions/
+
+# Or copy to project-local extensions (from project root)
+mkdir -p .pi/extensions
+cp -r Dream-Pixels-Forge/plugins/pi-extensions/pi-songsy/extensions/songsy .pi/extensions/
+```
+
+Or install directly via GitHub URL without cloning:
+
+```bash
+# One-liner: download and install to Pi global extensions
+cd /tmp && git clone --depth 1 https://github.com/Dream-Pixels-Forge/Dream-Pixels-Forge.git && cp -r Dream-Pixels-Forge/plugins/pi-extensions/pi-songsy/extensions/songsy ~/.pi/agent/extensions/ && rm -rf /tmp/Dream-Pixels-Forge
+```
+
+### Option 2: Copy from local clone
 
 ```bash
 # Copy the extension to Pi's global extensions
@@ -24,7 +47,7 @@ cp -r extensions/songsy ~/.pi/agent/extensions/
 cp -r extensions/songsy .pi/extensions/
 ```
 
-### Option 2: Symlink
+### Option 3: Symlink
 
 ```bash
 # Create symlink in Pi's global extensions
