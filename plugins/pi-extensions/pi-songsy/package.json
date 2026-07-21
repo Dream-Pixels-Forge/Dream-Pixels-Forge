@@ -1,0 +1,21 @@
+{
+  "name": "pi-songsy",
+  "version": "1.0.0",
+  "description": "MiniMax music generation extension for Pi agent",
+  "main": "extensions/songsy/index.ts",
+  "scripts": {
+    "test": "node test-extension.ts",
+    "typecheck": "cd extensions/songsy && npx tsc --noEmit"
+  },
+  "keywords": [
+    "pi-agent",
+    "extension",
+    "music-generation",
+    "minimax",
+    "ai-music"
+  ],
+  "author": "Dream Pixels Forge",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
