@@ -7,7 +7,9 @@ A Pi agent extension for generating music using the MiniMax API. Create songs fr
 - **Song Generation**: Create songs from lyrics with customizable style and mood
 - **Instrumental Generation**: Generate instrumental tracks without vocals
 - **Cover Creation**: Produce cover versions from reference audio
+- **mmx CLI Integration**: Use MiniMax CLI for advanced music generation with rich parameters
 - **Multiple Models**: Support for music-3.0, music-2.6, and music-cover models
+- **Advanced Parameters**: Vocals, genre, mood, instruments, BPM, key, references
 - **Audio Settings**: Configurable sample rate, bitrate, and format
 - **Cover Preprocessing**: Extract lyrics and audio features for advanced cover workflows
 - **Download to Disk**: Save generated music files locally
@@ -71,9 +73,77 @@ ln -s /path/to/pi-songsy/extensions/songsy .pi/extensions/songsy
 
 ## Usage
 
-### Tool: `minimax_music`
+### Tool: `mmx_music` (Recommended — requires mmx CLI)
 
-Generate music with the `minimax_music` tool:
+Use the `mmx_music` tool for rich music generation via mmx CLI:
+
+```typescript
+// Generate a song with lyrics
+mmx_music({
+  command: "generate",
+  prompt: "Pop, upbeat, summer vibes",
+  lyrics: "[Verse]\nSunshine feels so good\n[Chorus]\nLet's dance all night",
+  out: "./music/summer.mp3"
+})
+
+// Generate with advanced parameters
+mmx_music({
+  command: "generate",
+  prompt: "Warm morning folk",
+  vocals: "male and female duet, harmonies in chorus",
+  instruments: "acoustic guitar, piano",
+  bpm: 95,
+  genre: "folk",
+  mood: "warm",
+  lyrics: "[Verse]\n...",
+  out: "./music/duet.mp3"
+})
+
+// Generate instrumental
+mmx_music({
+  command: "generate",
+  prompt: "Epic orchestral, cinematic",
+  instrumental: true,
+  out: "./music/bgm.mp3"
+})
+
+// Auto-generate lyrics from prompt
+mmx_music({
+  command: "generate",
+  prompt: "Upbeat pop about summer",
+  lyrics_optimizer: true,
+  out: "./music/summer.mp3"
+})
+
+// Create a cover (preprocessing handled automatically)
+mmx_music({
+  command: "cover",
+  prompt: "Indie folk, acoustic guitar",
+  audio: "https://example.com/song.mp3",
+  out: "./music/cover.mp3"
+})
+
+// Create a cover from local file
+mmx_music({
+  command: "cover",
+  prompt: "Jazz, piano, slow",
+  audio_file: "./original.mp3",
+  out: "./music/jazz_cover.mp3"
+})
+
+// Reproducible output with seed
+mmx_music({
+  command: "cover",
+  prompt: "Pop, upbeat",
+  audio: "https://example.com/ref.mp3",
+  seed: 42,
+  out: "./music/reproducible.mp3"
+})
+```
+
+### Tool: `minimax_music` (Direct API)
+
+Use when mmx CLI is not installed:
 
 ```typescript
 // Generate a song with lyrics
@@ -100,7 +170,7 @@ minimax_music({
 
 ### Tool: `minimax_music_cover_preprocess`
 
-Preprocess reference audio for cover generation:
+Preprocess reference audio for cover generation (mmx_music handles this automatically):
 
 ```typescript
 minimax_music_cover_preprocess({
@@ -115,6 +185,25 @@ Quick music generation:
 ```
 /music upbeat electronic dance track
 ```
+
+## mmx CLI Advanced Parameters
+
+The `mmx_music` tool supports these rich parameters:
+
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| `vocals` | Vocal style | "warm male baritone", "duet with harmonies" |
+| `genre` | Music genre | folk, pop, jazz, electronic |
+| `mood` | Mood/emotion | warm, melancholic, uplifting |
+| `instruments` | Instruments to feature | "acoustic guitar, piano, strings" |
+| `tempo` | Tempo description | fast, slow, moderate |
+| `bpm` | Exact tempo (BPM) | 95, 120 |
+| `key` | Musical key | "C major", "A minor" |
+| `avoid` | Elements to avoid | "heavy drums, distortion" |
+| `references` | Reference artists | "similar to Ed Sheeran" |
+| `structure` | Song structure | "verse-chorus-verse-bridge-chorus" |
+| `seed` | Reproducibility seed | 0-1000000 |
+| `out` | Save directly to file | "./music/song.mp3" |
 
 ## Model Options
 

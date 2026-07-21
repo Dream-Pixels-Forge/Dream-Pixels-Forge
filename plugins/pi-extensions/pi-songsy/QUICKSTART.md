@@ -2,24 +2,35 @@
 
 ## 1. Install the Extension
 
-### Option A: Copy to Pi extensions directory (recommended)
+### Option A: Install from GitHub (recommended)
 
 ```bash
-# Navigate to the extension directory
-cd /path/to/pi-songsy
+cd /tmp && git clone --depth 1 https://github.com/Dream-Pixels-Forge/Dream-Pixels-Forge.git && cp -r Dream-Pixels-Forge/plugins/pi-extensions/pi-songsy/extensions/songsy ~/.pi/agent/extensions/ && rm -rf /tmp/Dream-Pixels-Forge
+```
 
-# Copy to Pi's global extensions
+### Option B: Copy to Pi extensions directory
+
+```bash
+cd /path/to/pi-songsy
 cp -r extensions/songsy ~/.pi/agent/extensions/
 ```
 
-### Option B: Symlink
+### Option C: Symlink
 
 ```bash
-# Create symlink in Pi's global extensions
 ln -s /path/to/pi-songsy/extensions/songsy ~/.pi/agent/extensions/songsy
 ```
 
-## 2. Set Up API Key
+## 2. Install mmx CLI (Recommended)
+
+```bash
+npm install -g mmx
+mmx auth login
+```
+
+mmx CLI gives you access to advanced music parameters (vocals, genre, mood, BPM, key, etc.) and handles cover preprocessing automatically.
+
+## 3. Set Up API Key
 
 1. Get a MiniMax API key from [platform.minimax.io](https://platform.minimax.io)
 2. Set the environment variable:
@@ -33,6 +44,8 @@ Or add to your `.env` file:
 ```
 MINIMAX_API_KEY=your_api_key_here
 ```
+
+If using mmx CLI, you can also run `mmx auth login` for authentication.
 
 ## 3. Test the Extension
 
