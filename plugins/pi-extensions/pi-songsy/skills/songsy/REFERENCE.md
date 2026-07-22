@@ -1,150 +1,79 @@
-# MiniMax Music Generation API Reference
+# MiniMax Music Generation Reference
 
-## Endpoints
+## Overview
 
-### POST /v1/music_generation
-Generate music from lyrics and prompt.
+This extension uses the **mmx CLI** for all music generation. The mmx CLI handles API authentication and all API calls internally.
 
-### POST /v1/music_cover_preprocess
-Preprocess reference audio for cover generation. Returns `cover_feature_id` and extracted lyrics.
+## Prerequisites
 
-## Tools
-
-### minimax_music
-Main tool for music generation. Supports all models and parameters.
-
-### minimax_music_cover_preprocess
-Preprocessing tool for cover generation. Use before generating covers with modified lyrics.
-
-### minimax_music_download
-Download generated music to disk. Save audio from URL or hex-encoded data.
-
-## Authentication
-- Bearer token authentication
-- Set `MINIMAX_API_KEY` environment variable
-- API key from [platform.minimax.io](https://platform.minimax.io)
-
-## Request Body (Music Generation)
-
-```json
-{
-  "model": "music-3.0",
-  "prompt": "Pop, melancholic, perfect for a rainy night",
-  "lyrics": "[verse]\nStreetlights flicker, the night breeze sighs\n[chorus]\nPushing the wooden door, the aroma spreads",
-  "is_instrumental": false,
-  "lyrics_optimizer": false,
-  "audio_setting": {
-    "sample_rate": 44100,
-    "bitrate": 256000,
-    "format": "mp3"
-  },
-  "output_format": "hex",
-  "stream": false
-}
+Install mmx CLI:
+```bash
+npm install -g mmx
 ```
 
-## Response Body
-
-```json
-{
-  "data": {
-    "status": 2,
-    "audio": "hex-encoded audio data"
-  },
-  "trace_id": "04ede0ab069fb1ba8be5156a24b1e081",
-  "extra_info": {
-    "music_duration": 25364,
-    "music_sample_rate": 44100,
-    "music_channel": 2,
-    "bitrate": 256000,
-    "music_size": 813651
-  },
-  "base_resp": {
-    "status_code": 0,
-    "status_msg": "success"
-  }
-}
+Set API key:
+```bash
+export MINIMAX_API_KEY=your_api_key_here
 ```
 
-## Cover Preprocessing
+## Tool: mmx_music
 
-### Request
-```json
-{
-  "model": "music-cover",
-  "audio_url": "https://example.com/song.mp3"
-}
-```
+### Command
 
-### Response
-```json
-{
-  "cover_feature_id": "a1b2c3d4e5f67890abcdef1234567890",
-  "formatted_lyrics": "[Verse 1]\nFirst line of the song\n[Chorus]\nThis is the chorus",
-  "structure_result": "{\"num_segments\":4,\"segments\":[...]}",
-  "audio_duration": 90,
-  "trace_id": "061e5f144eb7f10b1fdde81126e24f91",
-  "base_resp": {
-    "status_code": 0,
-    "status_msg": "success"
-  }
-}
-```
+`mmx_music`
 
-## Two-Step Cover Workflow
+### Parameters
 
-1. Call `/v1/music_cover_preprocess` with reference audio
-2. Receive `cover_feature_id` and `formatted_lyrics`
-3. Optionally modify lyrics
-4. Call `/v1/music_generation` with `cover_feature_id` and modified lyrics
+#### Required
+- `command`: "generate" or "cover"
+- `prompt`: Music description (style, mood, scenario)
 
-## Model Specifications
+#### Generate Options
+- `lyrics`: Song lyrics with structure tags (max 3500 chars)
+- `lyrics_file`: Path to lyrics file (use - for stdin)
+- `instrumental`: Generate instrumental (no vocals)
+- `lyrics_optimizer`: Auto-generate lyrics from prompt
 
-### music-3.0 (Recommended)
-- Text-to-music generation
-- Available to Token Plan and paid users
-- RPM: 120
-- Supports lyrics optimization
-- Supports instrumental generation
+#### Cover Options
+- `audio`: Reference audio URL
+- `audio_file`: Local reference audio file path
+- `seed`: Random seed 0-1000000 for reproducible results
 
-### music-2.6
-- Previous-generation text-to-music model
-- Available to Token Plan and paid users
-- RPM: 120
+#### Advanced Parameters (Generate only)
+- `vocals`: Vocal style (e.g., "warm male baritone", "duet with harmonies")
+- `genre`: Music genre (e.g., folk, pop, jazz, electronic)
+- `mood`: Mood/emotion (e.g., warm, melancholic, uplifting)
+- `instruments`: Instruments to feature (e.g., "acoustic guitar, piano, strings")
+- `tempo`: Tempo description (e.g., fast, slow, moderate)
+- `bpm`: Exact tempo in BPM (e.g., 95, 120)
+- `key`: Musical key (e.g., "C major", "A minor")
+- `avoid`: Elements to avoid (e.g., "heavy drums, distortion")
+- `references`: Reference artists (e.g., "similar to Ed Sheeran")
+- `structure`: Song structure (e.g., "verse-chorus-verse-bridge-chorus")
 
-### music-cover
-- Cover generation from reference audio
-- Available to Token Plan and paid users
-- RPM: 120
-- Reference audio: 6 seconds to 6 minutes, max 50 MB
+#### Output Options
+- `model`: Model name (music-3.0, music-2.6, music-cover, or free variants)
+- `out`: Save directly to file path (e.g., "./music/song.mp3")
+- `format`: Audio format (mp3, wav, pcm)
+- `sample_rate`: Sample rate (16000, 24000, 32000, 44100)
+- `bitrate`: Bitrate (32000, 64000, 128000, 256000)
+- `output_format`: Output format (url for 24h expiry, hex for saved to file)
+- `stream`: Stream raw audio to stdout (boolean)
 
-### Free Tier Models
-- `music-3.0-free`, `music-2.6-free`, `music-cover-free`
-- Available to all users via API Key
-- RPM: 3
+## Model Options
 
-## Audio Settings Details
-
-### Sample Rate
-- 16000 Hz (low quality, small size)
-- 24000 Hz (medium quality)
-- 32000 Hz (good quality)
-- 44100 Hz (high quality, CD standard)
-
-### Bitrate
-- 32000 bps (low quality)
-- 64000 bps (medium quality)
-- 128000 bps (good quality)
-- 256000 bps (high quality)
-
-### Format
-- `mp3`: Compressed, small file size
-- `wav`: Uncompressed, large file size
-- `pcm`: Raw audio data
+| Model | Description | Rate Limit |
+|-------|-------------|------------|
+| `music-3.0` | Text-to-music (recommended) | 120 RPM |
+| `music-2.6` | Previous-gen text-to-music | 120 RPM |
+| `music-cover` | Cover generation | 120 RPM |
+| `music-3.0-free` | Free tier | 3 RPM |
+| `music-2.6-free` | Free tier | 3 RPM |
+| `music-cover-free` | Free tier | 3 RPM |
 
 ## Official MiniMax Lyrics Structure Tags
 
-**IMPORTANT**: Only use these 14 officially supported tags for MiniMax:
+**IMPORTANT**: Only use these 14 officially supported tags:
 
 | Tag | Purpose | Musical Function |
 |-----|---------|------------------|
@@ -175,28 +104,36 @@ Download generated music to disk. Save audio from URL or hex-encoded data.
 - `[Vamp]` - NOT supported
 - `[Coda]` - NOT supported
 
-## Error Codes
+## Audio Settings
 
-- `0`: Success
-- `1002`: Rate limit triggered, retry later
-- `1004`: Authentication failed, check API Key
-- `1008`: Insufficient balance
-- `1026`: Content flagged for sensitive material
-- `2013`: Invalid parameters, check input
-- `2049`: Invalid API Key
+### Sample Rate
+- 16000 Hz (low quality, small size)
+- 24000 Hz (medium quality)
+- 32000 Hz (good quality)
+- 44100 Hz (high quality, CD standard)
 
-## Rate Limits
+### Bitrate
+- 32000 bps (low quality)
+- 64000 bps (medium quality)
+- 128000 bps (good quality)
+- 256000 bps (high quality)
 
-- Paid models: 120 RPM
-- Free models: 3 RPM
-- Monitor `base_resp.status_code` for rate limit errors
+### Format
+- `mp3`: Compressed, small file size
+- `wav`: Uncompressed, large file size
+- `pcm`: Raw audio data
 
-## Best Practices
+## Error Handling
 
-1. Use `music-3.0` for best quality
-2. Provide descriptive prompts for better results
-3. Use structure tags in lyrics for better arrangement
-4. Set appropriate audio settings for your use case
-5. Download URL outputs within 24 hours
-6. Handle rate limits with exponential backoff
-7. Use cover preprocessing for complex cover workflows
+mmx CLI errors will be reported with the error message. Common issues:
+- mmx not installed: Run `npm install -g mmx`
+- API key not set: Set `MINIMAX_API_KEY` environment variable
+- Rate limits: Wait and retry, or use free tier models
+- Invalid parameters: Check lyrics length, prompt length, etc.
+
+## Notes
+
+- mmx CLI handles all API authentication internally
+- URL outputs expire after 24 hours
+- Reference audio: 6 seconds to 6 minutes, max 50 MB
+- Free tier has lower RPM limits

@@ -3,8 +3,8 @@
 ## Example 1: Generate a Pop Song
 
 ```typescript
-minimax_music({
-  model: "music-3.0",
+mmx_music({
+  command: "generate",
   prompt: "Pop, upbeat, summer vibes, catchy melody",
   lyrics: `[Intro]
 Sunshine streaming through my window
@@ -35,72 +35,51 @@ This beautiful moment we create
 
 [Outro]
 Sunshine streaming through my window`,
-  audio_setting: {
-    sample_rate: 44100,
-    bitrate: 256000,
-    format: "mp3"
-  }
+  out: "./music/pop-song.mp3"
 })
 ```
 
 ## Example 2: Generate Instrumental Music
 
 ```typescript
-minimax_music({
-  model: "music-3.0",
+mmx_music({
+  command: "generate",
   prompt: "Epic orchestral, cinematic, heroic, building tension",
-  is_instrumental: true,
-  audio_setting: {
-    sample_rate: 44100,
-    bitrate: 256000,
-    format: "wav"
-  }
+  instrumental: true,
+  out: "./music/orchestral-bgm.mp3"
 })
 ```
 
 ## Example 3: Generate a Cover
 
 ```typescript
-// Step 1: Preprocess reference audio
-const preprocessResult = await minimax_music_cover_preprocess({
-  model: "music-cover",
-  audio_url: "https://example.com/original-song.mp3"
-});
-
-// Step 2: Generate cover with modified lyrics
-minimax_music({
-  model: "music-cover",
-  cover_feature_id: preprocessResult.cover_feature_id,
+// mmx handles preprocessing automatically
+mmx_music({
+  command: "cover",
   prompt: "Acoustic guitar version, soft and mellow",
-  lyrics: `[Verse 1]
-Modified lyrics here
-[Chorus]
-New chorus lyrics here`,
-  audio_setting: {
-    sample_rate: 44100,
-    bitrate: 128000,
-    format: "mp3"
-  }
+  audio: "https://example.com/original-song.mp3",
+  out: "./music/acoustic-cover.mp3"
 })
 ```
 
 ## Example 4: Quick Song with Auto Lyrics
 
 ```typescript
-minimax_music({
-  model: "music-3.0",
+mmx_music({
+  command: "generate",
   prompt: "Melancholic piano ballad, emotional, heartfelt",
-  lyrics_optimizer: true
+  lyrics_optimizer: true,
+  out: "./music/auto-lyrics.mp3"
 })
 ```
 
 ## Example 5: Generate with URL Output
 
 ```typescript
-minimax_music({
-  model: "music-3.0",
+mmx_music({
+  command: "generate",
   prompt: "Electronic dance music, high energy",
-  is_instrumental: true,
+  instrumental: true,
   output_format: "url"
 })
 // Returns URL that expires in 24 hours
@@ -109,23 +88,23 @@ minimax_music({
 ## Example 6: Low Quality Preview
 
 ```typescript
-minimax_music({
-  model: "music-3.0-free",
+mmx_music({
+  command: "generate",
   prompt: "Jazz, smooth, relaxed",
   lyrics: "[Verse]\nSmooth jazz flowing\n[Chorus]\nFeel the rhythm",
-  audio_setting: {
-    sample_rate: 16000,
-    bitrate: 32000,
-    format: "mp3"
-  }
+  model: "music-3.0-free",
+  format: "mp3",
+  sample_rate: 16000,
+  bitrate: 32000,
+  out: "./music/preview.mp3"
 })
 ```
 
 ## Example 7: Complex Song Structure
 
 ```typescript
-minimax_music({
-  model: "music-3.0",
+mmx_music({
+  command: "generate",
   prompt: "Progressive rock, complex arrangements, dynamic",
   lyrics: `[Intro]
 Instrumental buildup
@@ -150,145 +129,58 @@ Different section
 
 [Outro]
 Fading out`,
-  audio_setting: {
-    sample_rate: 44100,
-    bitrate: 256000,
-    format: "wav"
-  }
+  out: "./music/prog-rock.mp3"
 })
 ```
 
-## Example 8: Cover with Lyrics Modification
+## Example 8: Cover from Local File
 
 ```typescript
-// Preprocess to get original lyrics
-const preprocess = await minimax_music_cover_preprocess({
-  model: "music-cover",
-  audio_url: "https://example.com/song.mp3"
-});
-
-// Modify the extracted lyrics
-const modifiedLyrics = preprocess.formatted_lyrics
-  .replace("Original line", "New line");
-
-// Generate cover with modified lyrics
-minimax_music({
-  model: "music-cover",
-  cover_feature_id: preprocess.cover_feature_id,
+mmx_music({
+  command: "cover",
   prompt: "Piano version, slow and emotional",
-  lyrics: modifiedLyrics
+  audio_file: "./original.mp3",
+  out: "./music/piano-cover.mp3"
 })
 ```
 
-## Example 9: Batch Generation
+## Example 9: Reproducible Output
 
 ```typescript
-// Generate multiple versions
-const prompts = [
-  "Upbeat pop, happy",
-  "Sad ballad, emotional",
-  "Electronic dance, high energy"
-];
-
-for (const prompt of prompts) {
-  const result = await minimax_music({
-    model: "music-3.0",
-    prompt,
-    is_instrumental: true,
-    output_format: "url"
-  });
-  console.log(`Generated: ${result.audio_url}`);
-}
-```
-
-## Example 10: Error Handling
-
-```typescript
-try {
-  const result = await minimax_music({
-    model: "music-3.0",
-    prompt: "Test song",
-    lyrics: "Test lyrics"
-  });
-  
-  if (result.base_resp?.status_code !== 0) {
-    console.error(`API Error: ${result.base_resp?.status_msg}`);
-  }
-} catch (error) {
-  console.error(`Request failed: ${error.message}`);
-}
-```
-
-## Example 11: Download Music to Disk
-
-```typescript
-// Generate music and download to file
-const musicResult = await minimax_music({
-  model: "music-3.0",
+// Same seed = same output
+mmx_music({
+  command: "cover",
   prompt: "Pop, upbeat",
-  lyrics: "[Verse]\nHello world",
-  output_format: "hex"
-});
-
-// Download the generated music
-const downloadResult = await minimax_music_download({
-  audio_hex: musicResult.audio_hex,
-  output_path: "./music/my-song.mp3"
-});
-
-console.log(`Downloaded to: ${downloadResult.output_path}`);
-console.log(`File size: ${downloadResult.file_size}`);
+  audio: "https://example.com/ref.mp3",
+  seed: 42,
+  out: "./music/reproducible.mp3"
+})
 ```
 
-## Example 12: Download from URL
+## Example 10: Advanced Parameters
 
 ```typescript
-// Generate music with URL output
-const musicResult = await minimax_music({
-  model: "music-3.0",
-  prompt: "Jazz, smooth",
-  is_instrumental: true,
-  output_format: "url"
-});
-
-// Download from URL
-const downloadResult = await minimax_music_download({
-  audio_url: musicResult.audio_url,
-  output_path: "./music/jazz-instrumental.mp3"
-});
-
-console.log(`Downloaded: ${downloadResult.file_size}`);
+mmx_music({
+  command: "generate",
+  prompt: "Warm morning folk",
+  vocals: "male and female duet, harmonies in chorus",
+  instruments: "acoustic guitar, piano, strings",
+  genre: "folk",
+  mood: "warm",
+  bpm: 95,
+  key: "G major",
+  avoid: "heavy drums, distortion",
+  references: "similar to The Lumineers",
+  structure: "verse-chorus-verse-bridge-chorus",
+  out: "./music/folk-duet.mp3"
+})
 ```
 
-## Example 13: Batch Download
+## Example 11: Gospel Song with Section Tags
 
 ```typescript
-// Generate multiple songs and download all
-const songs = [
-  { prompt: "Pop, happy", lyrics: "[Verse]\nHappy day" },
-  { prompt: "Rock, energetic", lyrics: "[Verse]\nRock on" },
-  { prompt: "Classical, peaceful", is_instrumental: true }
-];
-
-for (let i = 0; i < songs.length; i++) {
-  const musicResult = await minimax_music({
-    model: "music-3.0",
-    ...songs[i],
-    output_format: "hex"
-  });
-  
-  await minimax_music_download({
-    audio_hex: musicResult.audio_hex,
-    output_path: `./music/song-${i + 1}.mp3`
-  });
-}
-```
-
-## Example 14: Gospel Song with Section Tags
-
-```typescript
-minimax_music({
-  model: "music-3.0",
+mmx_music({
+  command: "generate",
   prompt: "Contemporary Gospel with soul influences, powerful choir",
   lyrics: `[Intro]
 [Verse 1]
@@ -310,19 +202,15 @@ Grace will lead me home
 Grace will lead me home
 [Outro]
 Home, home, home...`,
-  audio_setting: {
-    sample_rate: 44100,
-    bitrate: 256000,
-    format: "mp3"
-  }
+  out: "./music/gospel.mp3"
 })
 ```
 
-## Example 15: EDM Track with Build Up
+## Example 12: EDM Track with Build Up
 
 ```typescript
-minimax_music({
-  model: "music-3.0",
+mmx_music({
+  command: "generate",
   prompt: "Electronic dance music, high energy, festival anthem",
   lyrics: `[Intro]
 [Verse 1]
@@ -344,17 +232,16 @@ When the beat stops
 We keep moving on
 [Chorus]
 Let the music take control
-[Outro]
-`,
-  is_instrumental: false
+[Outro]`,
+  out: "./music/edm-anthem.mp3"
 })
 ```
 
-## Example 16: R&B Ballad
+## Example 13: R&B Ballad
 
 ```typescript
-minimax_music({
-  model: "music-3.0",
+mmx_music({
+  command: "generate",
   prompt: "Smooth R&B ballad, intimate vocals, romantic mood",
   lyrics: `[Intro]
 [Verse 1]
@@ -376,6 +263,49 @@ You're all I need today
 Baby, you're my everything
 The song my heart sings
 [Outro]
-My everything...`
+My everything...`,
+  out: "./music/rnb-ballad.mp3"
+})
+```
+
+## Example 14: Cover with Seed for Reproducibility
+
+```typescript
+// Generate multiple versions with different seeds
+for (let seed = 1; seed <= 3; seed++) {
+  mmx_music({
+    command: "cover",
+    prompt: "Indie folk, acoustic guitar",
+    audio: "https://example.com/original.mp3",
+    seed,
+    out: `./music/cover-v${seed}.mp3`
+  })
+}
+```
+
+## Example 15: Instrumental with Specific Style
+
+```typescript
+mmx_music({
+  command: "generate",
+  prompt: "Lo-fi hip hop, chill beats, study music",
+  instrumental: true,
+  bpm: 85,
+  mood: "relaxed",
+  avoid: "vocals, aggressive drums",
+  out: "./music/lofi-beats.mp3"
+})
+```
+
+## Example 16: Song with Custom Key and Structure
+
+```typescript
+mmx_music({
+  command: "generate",
+  prompt: "Classical piano concerto, elegant, virtuosic",
+  key: "D minor",
+  structure: "intro-verse-solo-verse-bridge-solo-outro",
+  tempo: "moderate",
+  out: "./music/piano-concerto.mp3"
 })
 ```

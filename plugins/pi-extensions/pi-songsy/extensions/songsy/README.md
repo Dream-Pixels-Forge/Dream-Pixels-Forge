@@ -1,47 +1,67 @@
 # Songsy - MiniMax Music Generation Extension
 
-A Pi agent extension that provides music generation capabilities using the MiniMax API.
+A Pi agent extension that provides music generation capabilities using the **mmx CLI**.
+
+## Prerequisites
+
+Install the mmx CLI:
+```bash
+npm install -g mmx
+```
 
 ## Features
 
 - **Song Generation**: Create songs from lyrics with customizable style and mood
 - **Instrumental Generation**: Generate instrumental tracks without vocals
-- **Cover Creation**: Produce cover versions from reference audio
+- **Cover Creation**: Produce cover versions from reference audio (auto-preprocessed)
 - **Multiple Models**: Support for music-3.0, music-2.6, and music-cover models
-- **Audio Settings**: Configurable sample rate, bitrate, and format
+- **Advanced Parameters**: Vocals, genre, mood, instruments, BPM, key, references
 
 ## Setup
 
-1. Get a MiniMax API key from [platform.minimax.io](https://platform.minimax.io)
+1. Install mmx CLI: `npm install -g mmx`
 2. Set the environment variable: `MINIMAX_API_KEY=your_api_key`
 3. Place this extension in `~/.pi/agent/extensions/songsy/` or `.pi/extensions/songsy/`
 
 ## Usage
 
-### Tool: `minimax_music`
+### Tool: `mmx_music`
 
-Generate music with the `minimax_music` tool:
+Generate music with the `mmx_music` tool:
 
 ```typescript
 // Generate a song with lyrics
-minimax_music({
-  model: "music-3.0",
+mmx_music({
+  command: "generate",
   prompt: "Pop, upbeat, summer vibes",
-  lyrics: "[Verse]\nSunshine feels so good\n[Chorus]\nLet's dance all night"
+  lyrics: "[Verse]\nSunshine feels so good\n[Chorus]\nLet's dance all night",
+  out: "./music/summer.mp3"
+})
+
+// Generate with advanced parameters
+mmx_music({
+  command: "generate",
+  prompt: "Warm morning folk",
+  vocals: "male and female duet",
+  instruments: "acoustic guitar, piano",
+  bpm: 95,
+  out: "./music/duet.mp3"
 })
 
 // Generate instrumental
-minimax_music({
-  model: "music-3.0",
+mmx_music({
+  command: "generate",
   prompt: "Epic orchestral, cinematic",
-  is_instrumental: true
+  instrumental: true,
+  out: "./music/bgm.mp3"
 })
 
-// Create a cover
-minimax_music({
-  model: "music-cover",
-  audio_url: "https://example.com/song.mp3",
-  prompt: "Acoustic guitar version"
+// Create a cover (preprocessing handled automatically)
+mmx_music({
+  command: "cover",
+  prompt: "Indie folk, acoustic guitar",
+  audio: "https://example.com/song.mp3",
+  out: "./music/cover.mp3"
 })
 ```
 
@@ -52,24 +72,33 @@ Quick music generation:
 /music upbeat electronic dance track
 ```
 
-## Parameters
+## Advanced Parameters
 
-### Required
-- `model`: Model name (music-3.0, music-2.6, music-cover, or free variants)
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| `vocals` | Vocal style | "warm male baritone", "duet with harmonies" |
+| `genre` | Music genre | folk, pop, jazz, electronic |
+| `mood` | Mood/emotion | warm, melancholic, uplifting |
+| `instruments` | Instruments to feature | "acoustic guitar, piano, strings" |
+| `tempo` | Tempo description | fast, slow, moderate |
+| `bpm` | Exact tempo (BPM) | 95, 120 |
+| `key` | Musical key | "C major", "A minor" |
+| `avoid` | Elements to avoid | "heavy drums, distortion" |
+| `references` | Reference artists | "similar to Ed Sheeran" |
+| `structure` | Song structure | "verse-chorus-verse-bridge-chorus" |
+| `seed` | Reproducibility seed | 0-1000000 |
+| `out` | Save directly to file | "./music/song.mp3" |
 
-### Optional
-- `prompt`: Music description (style, mood, scenario)
-- `lyrics`: Song lyrics with structure tags
-- `is_instrumental`: Generate instrumental (no vocals)
-- `lyrics_optimizer`: Auto-generate lyrics from prompt
-- `audio_setting`: Audio configuration
-- `output_format`: url or hex (default: hex)
-- `stream`: Streaming output (default: false)
+## Model Options
 
-### Cover-specific
-- `audio_url`: Reference audio URL
-- `audio_base64`: Base64-encoded reference audio
-- `cover_feature_id`: Preprocessed audio features
+| Model | Description | Rate Limit |
+|-------|-------------|------------|
+| `music-3.0` | Text-to-music (recommended) | 120 RPM |
+| `music-2.6` | Previous-gen | 120 RPM |
+| `music-cover` | Cover generation | 120 RPM |
+| `music-3.0-free` | Free tier | 3 RPM |
+| `music-2.6-free` | Free tier | 3 RPM |
+| `music-cover-free` | Free tier | 3 RPM |
 
 ## Lyrics Structure Tags
 
@@ -79,35 +108,9 @@ Use these tags to structure lyrics:
 - `[Transition]`, `[Break]`, `[Hook]`, `[Build Up]`
 - `[Inst]`, `[Solo]`
 
-## Model Options
-
-- `music-3.0` (recommended): Text-to-music, RPM 120
-- `music-2.6`: Previous-gen, RPM 120
-- `music-cover`: Cover generation, RPM 120
-- `music-3.0-free`: Free tier, RPM 3
-- `music-2.6-free`: Free tier, RPM 3
-- `music-cover-free`: Free tier, RPM 3
-
-## Audio Settings
-
-- `sample_rate`: 16000, 24000, 32000, 44100
-- `bitrate`: 32000, 64000, 128000, 256000
-- `format`: mp3, wav, pcm
-
-## Error Handling
-
-Check `base_resp.status_code` in response:
-- `0`: Success
-- `1002`: Rate limit, retry later
-- `1004`: Authentication failed
-- `1008`: Insufficient balance
-- `1026`: Content flagged
-- `2013`: Invalid parameters
-- `2049`: Invalid API Key
-
 ## Notes
 
+- mmx CLI handles all API authentication via `MINIMAX_API_KEY`
 - URL links expire after 24 hours
 - Reference audio: 6 seconds to 6 minutes, max 50 MB
 - Free tier has lower RPM limits
-- Set `MINIMAX_API_KEY` environment variable for authentication

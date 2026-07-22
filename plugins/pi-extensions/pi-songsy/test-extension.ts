@@ -103,24 +103,12 @@ try {
     }
   );
   
-  if (output.includes('minimax_music')) {
+  if (output.includes('mmx_music')) {
     console.log('  ✓ Extension loaded successfully');
-    console.log('  ✓ minimax_music tool registered');
+    console.log('  ✓ mmx_music tool registered');
   } else {
-    console.log('  ✗ Extension loaded but tool not found');
+    console.log('  ✗ Extension loaded but mmx_music tool not found');
     console.log('  Output:', output.substring(0, 200) + '...');
-  }
-  
-  if (output.includes('minimax_music_cover_preprocess')) {
-    console.log('  ✓ minimax_music_cover_preprocess tool registered');
-  } else {
-    console.log('  ✗ minimax_music_cover_preprocess tool not found');
-  }
-  
-  if (output.includes('minimax_music_download')) {
-    console.log('  ✓ minimax_music_download tool registered');
-  } else {
-    console.log('  ✗ minimax_music_download tool not found');
   }
 } catch (error) {
   console.error('  ✗ Error testing extension with Pi');
@@ -129,7 +117,9 @@ try {
 
 console.log('\n✅ All tests passed!\n');
 console.log('The songsy extension is ready to use.');
+console.log('\nPrerequisites:');
+console.log('1. Install mmx CLI: npm install -g mmx');
+console.log('2. Set MINIMAX_API_KEY environment variable');
 console.log('\nTo use the extension:');
-console.log('1. Set MINIMAX_API_KEY environment variable');
-console.log('2. Run: pi -e ./extensions/songsy');
-console.log('3. Use the minimax_music tool to generate music');
+console.log('1. Run: pi -e ./extensions/songsy');
+console.log('2. Use the mmx_music tool to generate music');

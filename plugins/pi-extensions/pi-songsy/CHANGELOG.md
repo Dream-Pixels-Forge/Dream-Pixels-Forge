@@ -1,5 +1,27 @@
 # Changelog
 
+## [2.0.0] - 2026-07-21
+
+### Changed
+- **BREAKING**: Extension now only uses mmx CLI (no direct API calls)
+- Removed `minimax_music` tool (direct API)
+- Removed `minimax_music_cover_preprocess` tool (direct API)
+- Removed `minimax_music_download` tool (mmx handles --out)
+- Single tool: `mmx_music` for all music generation
+- Simplified extension to depend only on mmx CLI
+
+### Removed
+- Direct MiniMax API integration
+- Cover preprocessing tool (mmx handles automatically)
+- Download tool (mmx --out saves directly)
+- API response type definitions
+- MINIMAX_API_KEY requirement for extension (mmx CLI handles auth)
+
+### Added
+- Prerequisite: mmx CLI must be installed (`npm install -g mmx`)
+- Auto-detection of mmx CLI availability
+- Clear error messages when mmx not found
+
 ## [1.0.0] - 2026-07-21
 
 ### Added
@@ -42,34 +64,6 @@
 - Two-step cover workflow for advanced editing
 - Rate limit handling
 - Comprehensive error messages
-
-### Models Supported
-- music-3.0 (recommended)
-- music-2.6
-- music-cover
-- music-3.0-free
-- music-2.6-free
-- music-cover-free
-
-### Audio Settings
-- Sample rates: 16000, 24000, 32000, 44100 Hz
-- Bitrates: 32000, 64000, 128000, 256000 bps
-- Formats: mp3, wav, pcm
-
-### Lyrics Structure Tags
-- [Intro], [Verse], [Pre Chorus], [Chorus]
-- [Interlude], [Bridge], [Outro], [Post Chorus]
-- [Transition], [Break], [Hook], [Build Up]
-- [Inst], [Solo]
-
-### Error Codes Handled
-- 0: Success
-- 1002: Rate limit
-- 1004: Authentication failed
-- 1008: Insufficient balance
-- 1026: Content flagged
-- 2013: Invalid parameters
-- 2049: Invalid API Key
 
 ## [Unreleased]
 

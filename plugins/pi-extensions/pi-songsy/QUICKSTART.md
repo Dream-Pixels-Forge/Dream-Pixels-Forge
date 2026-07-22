@@ -21,14 +21,11 @@ cp -r extensions/songsy ~/.pi/agent/extensions/
 ln -s /path/to/pi-songsy/extensions/songsy ~/.pi/agent/extensions/songsy
 ```
 
-## 2. Install mmx CLI (Recommended)
+## 2. Install mmx CLI
 
 ```bash
 npm install -g mmx
-mmx auth login
 ```
-
-mmx CLI gives you access to advanced music parameters (vocals, genre, mood, BPM, key, etc.) and handles cover preprocessing automatically.
 
 ## 3. Set Up API Key
 
@@ -45,9 +42,7 @@ Or add to your `.env` file:
 MINIMAX_API_KEY=your_api_key_here
 ```
 
-If using mmx CLI, you can also run `mmx auth login` for authentication.
-
-## 3. Test the Extension
+## 4. Test the Extension
 
 ```bash
 # Start Pi with the extension
@@ -60,85 +55,125 @@ pi
 "What tools are available?"
 ```
 
-## 4. Generate Music
+## 5. Generate Music
 
 ### Generate a Song with Lyrics
 
 ```typescript
-minimax_music({
-  model: "music-3.0",
+mmx_music({
+  command: "generate",
   prompt: "Pop, upbeat, summer vibes",
   lyrics: `[Verse]
 Sunshine feels so good
 [Chorus]
-Let's dance all night`
+Let's dance all night`,
+  out: "./music/summer.mp3"
+})
+```
+
+### Generate with Advanced Parameters
+
+```typescript
+mmx_music({
+  command: "generate",
+  prompt: "Warm morning folk",
+  vocals: "male and female duet, harmonies in chorus",
+  instruments: "acoustic guitar, piano",
+  bpm: 95,
+  genre: "folk",
+  mood: "warm",
+  out: "./music/duet.mp3"
 })
 ```
 
 ### Generate Instrumental Music
 
 ```typescript
-minimax_music({
-  model: "music-3.0",
+mmx_music({
+  command: "generate",
   prompt: "Epic orchestral, cinematic",
-  is_instrumental: true
+  instrumental: true,
+  out: "./music/bgm.mp3"
+})
+```
+
+### Auto-Generate Lyrics
+
+```typescript
+mmx_music({
+  command: "generate",
+  prompt: "Upbeat pop about summer",
+  lyrics_optimizer: true,
+  out: "./music/summer.mp3"
 })
 ```
 
 ### Create a Cover
 
 ```typescript
-// Step 1: Preprocess reference audio
-const preprocess = await minimax_music_cover_preprocess({
-  audio_url: "https://example.com/song.mp3"
-});
+// From URL (preprocessing handled automatically)
+mmx_music({
+  command: "cover",
+  prompt: "Indie folk, acoustic guitar",
+  audio: "https://example.com/song.mp3",
+  out: "./music/cover.mp3"
+})
 
-// Step 2: Generate cover
-minimax_music({
-  model: "music-cover",
-  cover_feature_id: preprocess.cover_feature_id,
-  prompt: "Acoustic guitar version"
+// From local file
+mmx_music({
+  command: "cover",
+  prompt: "Jazz, piano, slow",
+  audio_file: "./original.mp3",
+  out: "./music/jazz_cover.mp3"
 })
 ```
 
-### Download Music to Disk
+### Reproducible Output
 
 ```typescript
-// Generate music first
-const result = await minimax_music({
-  model: "music-3.0",
+mmx_music({
+  command: "cover",
   prompt: "Pop, upbeat",
-  output_format: "hex"
-});
-
-// Download to file
-minimax_music_download({
-  audio_hex: result.audio_hex,
-  output_path: "./music/my-song.mp3"
-});
-
-// Or download from URL
-minimax_music_download({
-  audio_url: result.audio_url,
-  output_path: "./music/my-song.mp3"
-});
+  audio: "https://example.com/ref.mp3",
+  seed: 42,
+  out: "./music/reproducible.mp3"
+})
 ```
 
-## 5. Use the Command
+## 6. Use the Command
 
 ```bash
 # Quick music generation
 /music upbeat electronic dance track
 ```
 
+## Advanced Parameters
+
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| `vocals` | Vocal style | "warm male baritone", "duet with harmonies" |
+| `genre` | Music genre | folk, pop, jazz, electronic |
+| `mood` | Mood/emotion | warm, melancholic, uplifting |
+| `instruments` | Instruments to feature | "acoustic guitar, piano, strings" |
+| `tempo` | Tempo description | fast, slow, moderate |
+| `bpm` | Exact tempo (BPM) | 95, 120 |
+| `key` | Musical key | "C major", "A minor" |
+| `avoid` | Elements to avoid | "heavy drums, distortion" |
+| `references` | Reference artists | "similar to Ed Sheeran" |
+| `structure` | Song structure | "verse-chorus-verse-bridge-chorus" |
+| `seed` | Reproducibility seed | 0-1000000 |
+| `out` | Save directly to file | "./music/song.mp3" |
+
 ## Model Options
 
-- `music-3.0` (recommended): Best quality, RPM 120
-- `music-2.6`: Previous gen, RPM 120
-- `music-cover`: Cover generation, RPM 120
-- `music-3.0-free`: Free tier, RPM 3
-- `music-2.6-free`: Free tier, RPM 3
-- `music-cover-free`: Free tier, RPM 3
+| Model | Description | Rate Limit |
+|-------|-------------|------------|
+| `music-3.0` | Text-to-music (recommended) | 120 RPM |
+| `music-2.6` | Previous-gen | 120 RPM |
+| `music-cover` | Cover generation | 120 RPM |
+| `music-3.0-free` | Free tier | 3 RPM |
+| `music-2.6-free` | Free tier | 3 RPM |
+| `music-cover-free` | Free tier | 3 RPM |
 
 ## Lyrics Structure Tags
 
@@ -159,17 +194,11 @@ Use these tags in your lyrics:
 - `[Inst]` - Instrumental section
 - `[Solo]` - Solo section
 
-## Audio Settings
-
-```typescript
-audio_setting: {
-  sample_rate: 44100,  // 16000, 24000, 32000, 44100
-  bitrate: 256000,     // 32000, 64000, 128000, 256000
-  format: "mp3"        // mp3, wav, pcm
-}
-```
-
 ## Troubleshooting
+
+### "mmx CLI not found"
+- Install with: `npm install -g mmx`
+- Ensure npm global bin is in your PATH
 
 ### "MiniMax API key not found"
 - Set the `MINIMAX_API_KEY` environment variable
