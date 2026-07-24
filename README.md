@@ -1,64 +1,157 @@
+# Dream Pixels Forge
 
-# Dream Pixels Forge 
+<p align="center">
+  <img width="1983" height="793" alt="banner" src="https://github.com/user-attachments/assets/2d30ebd1-0eae-4c9f-953f-274388cde4f4" />
+</p>
 
-<img width="1983" height="793" alt="banner" src="https://github.com/user-attachments/assets/2d30ebd1-0eae-4c9f-953f-274388cde4f4" />
+<p align="center">
+  <strong>Building the Future of AI-Powered Creativity.</strong>
+</p>
 
-Exploring the intersection of Human Creativity and Machine Intelligence.
+<p align="center">
 
-## The Journey
+AI Agents • Creative Operating Systems • Blender • ComfyUI • MCP • Automation • Open Source
 
-I believe that technology is at its best when it acts as an invisible bridge between an idea and its realization. My work is a continuous exploration of how AI and 3D can empower creators to push the boundaries of their imagination.
+</p>
 
-I'm currently focused on crafting tools that make complex workflows feel like magic—blending the precision of Blender with the raw power of generative AI.
+---
 
-## Community Projects
+## 🚀 About
 
-These are open tools built for artists and developers to explore together. If you find them useful, leaving a ⭐ on the repository is the best way to support my work!
+Dream Pixels Forge is an open-source creative technology ecosystem dedicated to building next-generation AI tools for creators.
 
-### Last Projects
+Our projects span autonomous AI agents, creative operating systems, Blender tools, MCP servers, ComfyUI workflows, music technology, prompt engineering, and intelligent creative automation.
 
-1. <https://github.com/Dream-Pixels-Forge/brandly>
-2. <https://github.com/Dream-Pixels-Forge/artisan_labs_dev>
-3. <https://github.com/Dream-Pixels-Forge/universal-blender-mcp>
-4. <https://github.com/Dream-Pixels-Forge/prides>
-5. <https://github.com/Dream-Pixels-Forge/vanguard-wooden-uikit>
+The mission is simple:
 
-### Project Showcase
+> Empower creators to build faster, think bigger, and remove technical barriers between imagination and execution.
 
-Current project snapshots are shown below. The displayed image has been updated to the latest project version.
+---
 
-<div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-start;">
-  <figure style="width:280px; margin:0;">
-    <img src="assets/projects/dpf-obsidian-wiki.png" alt="Updated dpf-obsidian-wiki project screenshot" style="width:100%; height:auto; border-radius:16px; box-shadow:0 16px 40px rgba(0,0,0,0.15);" />
-    <figcaption style="margin-top:0.75rem; font-size:0.95rem; line-height:1.4;">
-      <strong>dpf-obsidian-wiki</strong><br />
-      Current project, click to the link· <a href="https://github.com/Dream-Pixels-Forge/dpf-obsidian-wiki">GitHub</a>
-    </figcaption>
-  </figure>
-</div>
+# ⚡ Current Focus
 
-| Project | Goal | Status | GitHub |
-| --- | --- | --- | --- |
-| Aspect-Ratio | Simplify framing for digital artists. | Stable | [GitHub](https://github.com/Dream-Pixels-Forge/Aspect-Ratio) |
-| Photographer-Alpha7-Nodes | Bring cinematic physics to AI generations. | Beta | [GitHub](https://github.com/Dream-Pixels-Forge/Photographer-Alpha7-Nodes) |
-| Mzikart-Singer | Experiments in AI-driven vocal expression. | Active | [GitHub](https://github.com/Dream-Pixels-Forge/Mzikart-Singer) |
+- 🤖 Autonomous AI Agents
+- 🎨 AI Artwork Generation
+- 🧠 Creative Operating Systems
+- 🎬 ComfyUI & FLUX Workflows
+- 🛠 Blender Development
+- 🔗 MCP Servers
+- 🎵 Music AI
+- 🚀 Creative Automation
 
-## Experiments & Learning
+---
 
-My daily "Forge" consists of playing with:
+# 🌟 Featured Projects
 
-- Generative systems: ComfyUI, Stable Diffusion, and LLM orchestration.
-- Visual aesthetics: mastering glassmorphism and intuitive UI/UX.
-- Global tech: driven by the dream of seeing the Democratic Republic of Congo's creative tech scene shine on the world stage.
+| Project | Description | Status |
+|---------|-------------|--------|
+| [Artworks Studio OS](https://github.com/Dream-Pixels-Forge/artworks-studio-os) | AI Operating System for artwork creation | 🚀 Active |
+| [Loopy Agent](https://github.com/Dream-Pixels-Forge/loopy-agent) | Autonomous AI workflow platform | 🚀 Active |
+| [Memorius](https://github.com/Dream-Pixels-Forge/memorius) | Memory engine for AI systems | 🚀 Active |
+| [PI Memorius](https://github.com/Dream-Pixels-Forge/pi-memorius) | Personal AI memory experiments | 🚀 Active |
+| [Brandly Plugin](https://github.com/Dream-Pixels-Forge/brandly-plugin) | Branding toolkit | 🚀 Active |
+| [PI Brandly](https://github.com/Dream-Pixels-Forge/pi-brandly) | AI brand ecosystem | 🚀 Active |
+| [Audacity MCP](https://github.com/Dream-Pixels-Forge/audacity-mcp) | MCP integration for Audacity | 🚀 Active |
+| [Tokenxygen](https://github.com/Dream-Pixels-Forge/tokenxygen) | Token & prompt engineering toolkit | 🚀 Active |
+| [Prompter](https://github.com/Dream-Pixels-Forge/prompter) | Professional prompt generation | 🚀 Active |
+| [Obsidian Memorius Plugin](https://github.com/Dream-Pixels-Forge/obsidian-memorius-plugin) | AI memory inside Obsidian | 🚀 Active |
+| [Vanguard GNL UIKit](https://github.com/Dream-Pixels-Forge/vanguard-gnl-uikit) | Modern UI component system | 🚀 Active |
+| [Aspect-Ratio](https://github.com/Dream-Pixels-Forge/Aspect-Ratio) | Composition & framing tools | ✅ Stable |
 
-## 🤝 Let's Build Together
+---
 
-Inspiration is a two-way street. If you find value in my tools, feel free to star the projects you like or reach out to collaborate on the next frontier of creative tech.
+# 🏗 Dream Pixels Forge Ecosystem
 
-> "The best way to predict the future is to forge it—together."
+```text
+Dream Pixels Forge
+│
+├── 🤖 AI Agents
+│   └── Loopy Agent
+│
+├── 🧠 Memory Systems
+│   ├── Memorius
+│   ├── PI Memorius
+│   └── Obsidian Memorius
+│
+├── 🎨 Creative Platforms
+│   ├── Artworks Studio OS
+│   ├── Brandly Plugin
+│   ├── PI Brandly
+│   └── Prompter
+│
+├── 🎵 Audio
+│   └── Audacity MCP
+│
+├── ⚡ AI Infrastructure
+│   ├── Tokenxygen
+│   ├── MCP Servers
+│   └── AI Automation
+│
+└── 🛠 Creative Tools
+    ├── Aspect Ratio
+    └── Vanguard GNL UIKit
+```
 
-## Connect
+---
 
-Stay updated with my latest experiments and creations:
+# 🛠 Technology
 
-Maintained with ☕ and passion by Dream Pixels Forge.
+- Python
+- TypeScript
+- Node.js
+- Electron
+- FastAPI
+- Blender
+- ComfyUI
+- FLUX
+- Stable Diffusion
+- MCP
+- AI Agents
+- GitHub Actions
+- Docker
+- OpenAI APIs
+
+---
+
+# ❤️ Open Source Philosophy
+
+Every repository published under **Dream Pixels Forge** is designed with one objective:
+
+**Help creators build faster.**
+
+Whether you're an artist, filmmaker, musician, designer, researcher, or developer, these tools are built to simplify creative workflows through intelligent automation.
+
+---
+
+# 🎯 Roadmap
+
+- ✅ AI Creative Platform
+- ✅ Creative Automation
+- ✅ AI Agents
+- ✅ MCP Ecosystem
+- 🚧 Creative Operating System
+- 🚧 Music AI Platform
+- 🚧 Collaborative AI Studio
+- 🚧 Cloud Creative Infrastructure
+
+---
+
+# 🤝 Let's Build Together
+
+If one of these projects helps you, consider:
+
+⭐ Starring the repository
+
+🐛 Reporting issues
+
+💡 Suggesting ideas
+
+🤝 Contributing code
+
+---
+
+> **"The future belongs to creators empowered by intelligence."**
+
+---
+
+Made with ❤️ by **Dream Pixels Forge**
