@@ -1,7 +1,7 @@
 ---
 description: "Comprehensive PR review using specialized agents"
-argument-hint: "[review-aspects]"
-allowed-tools: ["Bash", "Glob", "Grep", "Read", "Task"]
+agent: prides
+subtask: true
 ---
 
 # Comprehensive PR Review
@@ -19,12 +19,10 @@ Run a comprehensive pull request review using multiple specialized agents, each 
 
 2. **Available Review Aspects:**
 
-   - **comments** - Analyze code comment accuracy and maintainability
-   - **tests** - Review test coverage quality and completeness
-   - **errors** - Check error handling for silent failures
-   - **types** - Analyze type design and invariants (if new types added)
    - **code** - General code review for project guidelines
-   - **simplify** - Simplify code for clarity and maintainability
+   - **security** - Security audit of changes
+   - **errors** - Check error handling for silent failures
+   - **git** - Git hygiene and commit quality
    - **all** - Run all applicable reviews (default)
 
 3. **Identify Changed Files**
@@ -35,12 +33,10 @@ Run a comprehensive pull request review using multiple specialized agents, each 
 4. **Determine Applicable Reviews**
 
    Based on changes:
-   - **Always applicable**: code-reviewer (general quality)
-   - **If test files changed**: pr-test-analyzer
-   - **If comments/docs added**: comment-analyzer
-   - **If error handling changed**: silent-failure-hunter
-   - **If types added/modified**: type-design-analyzer
-   - **After passing review**: code-simplifier (polish and refine)
+   - **Always applicable**: `@review-critic` (general quality)
+   - **If error handling changed**: `@review-silent-failure-hunter`
+   - **If git history needs review**: `@review-git-expert`
+   - **For deep code analysis**: `@review-inspector`
 
 5. **Launch Review Agents**
 
@@ -91,59 +87,42 @@ Run a comprehensive pull request review using multiple specialized agents, each 
 
 **Full review (default):**
 ```
-/pr-review-toolkit:review-pr
+/review-pr
 ```
 
 **Specific aspects:**
 ```
-/pr-review-toolkit:review-pr tests errors
-# Reviews only test coverage and error handling
+/review-pr code errors
+# Reviews only code quality and error handling
 
-/pr-review-toolkit:review-pr comments
-# Reviews only code comments
+/review-pr security
+# Reviews only security concerns
 
-/pr-review-toolkit:review-pr simplify
-# Simplifies code after passing review
-```
-
-**Parallel review:**
-```
-/pr-review-toolkit:review-pr all parallel
-# Launches all agents in parallel
+/review-pr git
+# Reviews git hygiene and commit quality
 ```
 
 ## Agent Descriptions:
 
-**comment-analyzer**:
-- Verifies comment accuracy vs code
-- Identifies comment rot
-- Checks documentation completeness
+**review-critic**:
+- Checks code quality and guidelines compliance
+- Detects bugs and issues
+- Reviews general code quality
 
-**pr-test-analyzer**:
-- Reviews behavioral test coverage
-- Identifies critical gaps
-- Evaluates test quality
+**review-inspector**:
+- Deep code analysis
+- Identifies incomplete implementations
+- Finds broken or missing functionality
 
-**silent-failure-hunter**:
+**review-silent-failure-hunter**:
 - Finds silent failures
 - Reviews catch blocks
 - Checks error logging
 
-**type-design-analyzer**:
-- Analyzes type encapsulation
-- Reviews invariant expression
-- Rates type design quality
-
-**code-reviewer**:
-- Checks CLAUDE.md compliance
-- Detects bugs and issues
-- Reviews general code quality
-
-**code-simplifier**:
-- Simplifies complex code
-- Improves clarity and readability
-- Applies project standards
-- Preserves functionality
+**review-git-expert**:
+- Reviews git history
+- Checks commit quality
+- Validates branch strategy
 
 ## Tips:
 
@@ -158,7 +137,7 @@ Run a comprehensive pull request review using multiple specialized agents, each 
 **Before committing:**
 ```
 1. Write code
-2. Run: /pr-review-toolkit:review-pr code errors
+2. Run: /review-pr code errors
 3. Fix any critical issues
 4. Commit
 ```
@@ -166,7 +145,7 @@ Run a comprehensive pull request review using multiple specialized agents, each 
 **Before creating PR:**
 ```
 1. Stage all changes
-2. Run: /pr-review-toolkit:review-pr all
+2. Run: /review-pr all
 3. Address all critical and important issues
 4. Run specific reviews again to verify
 5. Create PR

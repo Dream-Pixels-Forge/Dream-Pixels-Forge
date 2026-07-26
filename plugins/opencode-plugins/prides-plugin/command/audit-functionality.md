@@ -47,7 +47,7 @@ Delegate to `@implement-coder` to:
 - **Connect to actual APIs/services** where needed
 
 ### 5. UI/UX Validation
-Invoke `@ui-ux-agent` to:
+Invoke `@implement-uiux` to:
 - Ensure all interactive elements have proper visual feedback
 - Verify hover, active, focus, and disabled states
 - Check accessibility of all interactive elements
@@ -60,7 +60,7 @@ Run through:
 - `@review-critic` - Final code review
 
 ### 7. Testing
-Invoke `@test-agent` to:
+Invoke `@implement-coder` and `@review-inspector` to:
 - Create tests for newly implemented functionality
 - Test all button clicks and interactions
 - Verify link navigation works correctly
